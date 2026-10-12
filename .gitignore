@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Medii virtuale
+.venv/
+venv/
+env/
+.env
+
+# IDE / editoare
+.vscode/
+.idea/
+*.swp
+*~
+
+
