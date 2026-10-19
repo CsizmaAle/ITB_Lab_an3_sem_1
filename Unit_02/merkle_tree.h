@@ -2,6 +2,8 @@
 #define MERKLE_TREE_H
 
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stddef.h>
 
 typedef struct MerkleTree MerkleTree;
 typedef struct MerkleProof MerkleProof;
@@ -20,5 +22,6 @@ int get_proof_count(MerkleProof *proof);
 const unsigned char* get_proof_sibling(MerkleProof *proof, int index);
 const unsigned char* get_root_hash(MerkleTree *tree);
 char* hash_to_string(const unsigned char *hash);
+void *sha256_hash(const void *input, size_t length, unsigned char *output);
 
 #endif // MERKLE_TREE_H

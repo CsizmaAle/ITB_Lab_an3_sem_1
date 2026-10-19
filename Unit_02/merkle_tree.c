@@ -156,9 +156,56 @@ void remove_element(MerkleTree *tree, const char *data) {
     }
 }
 
+
+    // ToDo + main.c
+    // 1. hashuim numele nostru
+    // 2. verificam daca numele nostru este in tree (in frunze); ca sa afli parintele st+dr si se aplica hash
+        // 2.1. arrays: 1 vecinii; 2 dc e in st sau in dreapta
+    // 3. proof: toate nodurile de la noi la radacina
 MerkleProof *generate_proof(MerkleTree *tree, const char *data) {
-    // ToDo
+    unsigned char current_hash[HASH_SIZE];
+    sha256_hash(data, strlen(data), current_hash);
+    Node *p = NULL;
+
+    for (int i = 0; i < tree->leaf_count; i++) {
+        if (memcmp(tree->leaves[i]->hash, current_hash, HASH_SIZE) == 0) {
+            p=tree->leaves[i];
+            break;
+        }
+    }
+    if(p==NULL)
+        return NULL;
+
+
+    MerkleProof *proof= malloc(sizeof(MerkleProof));
+    proof->count=0;
+    proof->directions=NULL;
+    proof->siblings=NULL;
+
+    while(p->parent!=NULL)
+    {
+        proof->count=proof->count+1;
+        proof->siblings=realloc(proof->siblings, proof->count * sizeof(unsigned char *));
+        proof->directions=realloc(proof->directions, proof->count * sizeof(int));
+        proof->siblings[proof->count -1 ] = malloc(HASH_SIZE);
+
+        if(p->parent->right!=p){
+                memcpy(proof->siblings[proof->count -1 ], p->parent->right->hash,  HASH_SIZE);
+                proof->directions[proof->count- 1]=1;
+                
+        }else{
+                memcpy( proof->siblings[proof->count- 1], p->parent->left->hash, HASH_SIZE);
+                proof->directions[proof->count -1 ]=-1;
+        }
+        p=p->parent;
+    }
+
+    return proof;
+
 }
+
+
+
 
 bool verify_proof(const unsigned char *root_hash, const char *data, MerkleProof *proof) {
     unsigned char current_hash[HASH_SIZE];
