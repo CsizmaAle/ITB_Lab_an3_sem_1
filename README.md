@@ -16,6 +16,6 @@ source venv/bin/activate
 python smtp_server.py      # terminal 1
 ngrok tcp 2525             # terminal 2
 
-python smtp_client.py 4.tcp.eu.ngrok.io 22222
+python smtp_client.py <COD>
 
 ```
