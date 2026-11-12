@@ -63,10 +63,8 @@ if __name__ =="__main__":
     for _ in range(15):
         line=conn.recvline().decode()
         print(line)
-
+        print(conn.recvline().decode())
         xxxx = find_xxxx(preluare_hash_func(line), preluare_hash(line), preluare_suffix(line))
-        
-        print(conn.recvline(b'Mine xxxx:\n').decode())
         conn.sendline(xxxx.encode())
         print(conn.recvline().decode())
 
