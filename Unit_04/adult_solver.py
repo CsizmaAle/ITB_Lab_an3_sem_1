@@ -1,7 +1,6 @@
 import itertools
 from pwn import *
 import hashlib
-import string
 
 #202.61.227.83:31338
 host='202.61.227.83'

@@ -15,11 +15,12 @@ port='31337'
 
 
 def find_xxxx(hash_func, hash_value, suffix):
-    for length in range(1, 5):  
-        for candidate in map(''.join, itertools.product(string.ascii_letters + string.digits, repeat=length)):
-            combined = candidate + suffix
-            if hash_func(combined.encode()).hexdigest() == hash_value:
-                return candidate
+    length=20-len(suffix)
+    #for length in range(1, 5):  
+    for candidate in map(''.join, itertools.product(string.ascii_letters + string.digits, repeat=length)):
+        combined = candidate + suffix
+        if hash_func(combined.encode()).hexdigest() == hash_value:
+            return candidate
     return None
 
 
