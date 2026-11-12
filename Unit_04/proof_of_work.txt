@@ -1,0 +1,3 @@
+proof baby pow solver:  itb{baby_pow_438e5c70670df1a0315028e61e245fb1}
+
+proof adult pow solver: itb{adult_pow_4191163658417a409125b9de4c92bacb}
